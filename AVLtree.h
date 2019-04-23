@@ -26,7 +26,9 @@ public:
     }
 
 
-//    ~AVLtree();
+    ~AVLtree(){
+        deleteTree(root);
+    }
 
     void insert(const K &key, const T &data) {
         if (!root) {
@@ -50,6 +52,14 @@ private:
             preOrder(root->leftSon);
             preOrder(root->rightSon);
         }
+    }
+
+    void deleteTree(Node* n){
+        if (n==NULL)
+            return;
+        deleteTree(n->leftSon);
+        deleteTree(n->rightSon);
+        delete(n);
     }
 
     void recInsert(Node *in, Node *curr) {
