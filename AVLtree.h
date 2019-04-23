@@ -41,6 +41,10 @@ public:
 
     }
 
+    void remove(const K& key){
+        recRemoval(root, key);
+    }
+
     void preOrder() {
         preOrder(root);
     }
@@ -52,6 +56,48 @@ private:
             preOrder(root->leftSon);
             preOrder(root->rightSon);
         }
+    }
+
+    void recRemoval(Node*n, const K& key){
+        if (n==NULL)
+            return;
+        if (n->key<key)
+            recRemoval(n->leftSon, key);
+        else if (n->key>key)
+            recRemoval(n->rightSon, key);
+        else if (n->leftSon==NULL && n->rightSon==NULL){
+            delete(n);
+            return;
+        }
+        else if (n->leftSon==NULL){
+            Node* temp= n->rightSon;
+            n->rightSon=temp->rightSon;
+            n->leftSon= temp->leftSon;
+            n->key= temp->key;
+            n->data= temp->data;
+            delete(temp);
+        }
+        else if (n->rightSon==NULL){
+            Node* temp= n->leftSon;
+            n->rightSon=temp->rightSon;
+            n->leftSon= temp->leftSon;
+            n->key= temp->key;
+            n->data= temp->data;
+            delete(temp);
+        }
+        else{
+            Node* temp= n->rightSon;
+            while (temp->leftSon!=NULL)
+                temp=temp->leftSon;
+            n->key= temp->key;
+            n->data= temp->data;
+            n->height= calcHeight(n);
+            temp->key= key;
+            recRemoval(n, key);
+        }
+
+        n->height= calcHeight(n);
+        preformRotation(n);
     }
 
     void deleteTree(Node* n){
@@ -76,6 +122,11 @@ private:
         }
 
         curr->height = calcHeight(curr);
+        preformRotation(curr);
+    }
+
+    //Decides if a rotation is required and preforms a rotation if necessary.
+    void preformRotation(Node *curr) {
         int balance = getNodeBalance(curr);
         if (balance == 2) {
             if (getNodeBalance(curr->leftSon) == -1)
