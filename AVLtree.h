@@ -1,0 +1,192 @@
+//
+// Created by tsofi on 23/04/2019.
+//
+
+#ifndef WET1DATASTRUCTURES_AVLTREE_H
+#define WET1DATASTRUCTURES_AVLTREE_H
+
+#include <iostream>
+
+
+template<class T, class K>
+class AVLtree {
+private:
+    typedef struct Node_t {
+        Node_t *rightSon;
+        Node_t *leftSon;
+        int height;
+        K key;
+        T data;
+    } Node;
+    Node *root;
+
+public:
+    AVLtree() {
+        root = NULL;
+    }
+
+
+//    ~AVLtree();
+
+    void insert(const K &key, const T &data) {
+        if (!root) {
+            root = new Node{NULL, NULL, 0, K(key), T(data)};
+            return;
+        }
+
+        Node *n = new Node{NULL, NULL, 0, K(key), T(data)};
+        recInsert(n, root);
+
+    }
+
+    void preOrder() {
+        preOrder(root);
+    }
+
+private:
+    void preOrder(Node *root) {
+        if (root != NULL) {
+            std::cout << root->key << " ";
+            preOrder(root->leftSon);
+            preOrder(root->rightSon);
+        }
+    }
+
+    void recInsert(Node *in, Node *curr) {
+        if (in->key < curr->key) {
+            if (curr->leftSon == NULL) {
+                curr->leftSon = in;
+            } else
+                recInsert(in, curr->leftSon);
+        } else {
+            if (curr->rightSon == NULL) {
+                curr->rightSon = in;
+            } else
+                recInsert(in, curr->rightSon);
+        }
+
+        curr->height = calcHeight(curr);
+        int balance = getNodeBalance(curr);
+        if (balance == 2) {
+            if (getNodeBalance(curr->leftSon) == -1)
+                lrRotation(curr);
+            else if (getNodeBalance(curr->leftSon) >= 0)
+                llRotation(curr);
+        }
+        if (balance == -2) {
+            if (getNodeBalance(curr->rightSon) == 1)
+                rlRotation(curr);
+            else if (getNodeBalance(curr->leftSon) <= 0)
+                rrRotation(curr);
+        }
+    }
+
+
+    // Get Balance factor of a specific node
+    int getNodeBalance(Node *N) {
+        if (N == NULL)
+            return 0;
+        if (N->rightSon == NULL && N->leftSon == NULL)
+            return 0;
+        if (N->rightSon == NULL)
+            return N->leftSon->height+1;
+        if (N->leftSon == NULL)
+            return -1-N->rightSon->height;
+        return (N->leftSon->height) - (N->rightSon->height);
+    }
+
+    int calcHeight(Node *n) {
+        if (n->rightSon == NULL && n->leftSon == NULL)
+            return 0;
+        if (n->rightSon == NULL)
+            return 1 + n->leftSon->height;
+        if (n->leftSon == NULL)
+            return 1 + n->rightSon->height;
+        return 1 + max(n->leftSon->height, n->rightSon->height);
+    }
+
+    //preform LL rotation
+    void llRotation(Node *n) {
+        Node *a = new Node;
+        a->data = T(n->data);
+        a->key = K(n->key);
+        a->leftSon = n->leftSon;
+        a->rightSon = n->rightSon->leftSon;
+        a->height = calcHeight(a);
+        n->data = T(n->rightSon->data);
+        n->key = K(n->rightSon->key);
+        Node *b = n->leftSon;
+        if (b == NULL)
+            n->leftSon = NULL;
+        else
+            n->leftSon = b->leftSon;
+        n->rightSon = a;
+        n->height = calcHeight(n);
+        delete (b);
+    }
+
+    //preform LR rotation
+    void lrRotation(Node *a) {
+        Node *b = a->leftSon;
+        Node *c = b->rightSon;
+        Node *moveA = new Node;
+        moveA->data = T(a->data);
+        moveA->key = T(a->key);
+        moveA->rightSon = a->rightSon;
+        moveA->leftSon = c->rightSon;
+        moveA->height = calcHeight(moveA);
+        a->rightSon = moveA;
+        a->key = K(c->key);
+        a->data = T(c->data);
+        b->leftSon = c->leftSon;
+        b->height = calcHeight(b);
+        a->height = calcHeight(a);
+        delete (c);
+    }
+
+    //preform RR rotation
+    //TODO: check correctness
+    void rrRotation(Node *a) {
+        Node *b = a->rightSon;
+        Node *moveA = new Node;
+        moveA->data = T(a->data);
+        moveA->key = K(a->key);
+        moveA->leftSon = a->leftSon;
+        moveA->rightSon = b->leftSon;
+        moveA->height = calcHeight(moveA);
+        a->leftSon = moveA;
+        a->data = T(b->data);
+        a->key = K(b->key);
+        a->rightSon = b->rightSon;
+        a->height = calcHeight(a);
+        delete (b);
+    }
+
+    //preform RL rotation
+    void rlRotation(Node *a) {
+        Node *b = a->rightSon;
+        Node *c = b->leftSon;
+        Node *moveA = new Node;
+        moveA->data = T(a->data);
+        moveA->key = T(a->key);
+        moveA->leftSon = a->leftSon;
+        moveA->rightSon = c->leftSon;
+        moveA->height = calcHeight(moveA);
+        a->leftSon = moveA;
+        a->data = T(c->data);
+        a->key = T(c->key);
+        b->leftSon = c->rightSon;
+        b->height = calcHeight(b);
+        a->height = calcHeight(a);
+        delete (c);
+
+    }
+
+    int max(int a, int b) {
+        return a < b ? b : a;
+    }
+
+
+};
+
+#endif //WET1DATASTRUCTURES_AVLTREE_H
