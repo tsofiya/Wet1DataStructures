@@ -11,9 +11,7 @@
     </configurations>
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="eda0c52d-fa88-4fab-8192-b31573242a62" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/AVLtree.h" beforeDir="false" afterPath="$PROJECT_DIR$/AVLtree.h" afterDir="false" />
-    </list>
+    <list default="true" id="eda0c52d-fa88-4fab-8192-b31573242a62" name="Default Changelist" comment="" />
     <ignored path="$PROJECT_DIR$/cmake-build-debug/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -26,7 +24,7 @@
     <session id="1392873806">
       <usages-collector id="statistics.lifecycle.project">
         <counts>
-          <entry key="project.closed" value="1" />
+          <entry key="project.closed" value="2" />
           <entry key="project.open.time.1" value="1" />
           <entry key="project.open.time.8" value="1" />
           <entry key="project.opened" value="2" />
@@ -75,8 +73,8 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/AVLtree.h">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="508">
-              <caret line="127" column="76" selection-end-line="253" />
+            <state relative-caret-position="580">
+              <caret line="253" lean-forward="true" selection-start-line="253" selection-end-line="253" />
             </state>
           </provider>
         </entry>
@@ -132,7 +130,7 @@
   </component>
   <component name="PropertiesComponent">
     <property name="WebServerToolWindowFactoryState" value="false" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/../list" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
     <property name="nodejs_interpreter_path.stuck_in_default_project" value="undefined stuck path" />
     <property name="nodejs_npm_path_reset_for_default_project" value="true" />
   </component>
@@ -175,7 +173,7 @@
       <option name="presentableId" value="Default" />
       <updated>1555430979807</updated>
       <workItem from="1555430982156" duration="28000" />
-      <workItem from="1556001917298" duration="11874000" />
+      <workItem from="1556001917298" duration="11985000" />
     </task>
     <task id="LOCAL-00001" summary="AVL tree implemntation.&#10;Implemented ctor and insertion.&#10;Need to implement deletion and dtor.">
       <created>1556020699183</created>
@@ -188,7 +186,7 @@
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="11902000" />
+    <option name="totallyTimeSpent" value="12013000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-7" y="-7" width="1550" height="838" extended-state="6" />
@@ -245,8 +243,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/AVLtree.h">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="508">
-          <caret line="127" column="76" selection-end-line="253" />
+        <state relative-caret-position="580">
+          <caret line="253" lean-forward="true" selection-start-line="253" selection-end-line="253" />
         </state>
       </provider>
     </entry>

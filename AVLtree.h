@@ -192,14 +192,14 @@ private:
         Node *c = b->rightSon;
         Node *moveA = new Node;
         moveA->data = T(a->data);
-        moveA->key = T(a->key);
+        moveA->key = K(a->key);
         moveA->rightSon = a->rightSon;
         moveA->leftSon = c->rightSon;
         moveA->height = calcHeight(moveA);
         a->rightSon = moveA;
         a->key = K(c->key);
         a->data = T(c->data);
-        b->leftSon = c->leftSon;
+        b->rightSon = c->leftSon;
         b->height = calcHeight(b);
         a->height = calcHeight(a);
         delete (c);
