@@ -74,8 +74,8 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/AVLtree.h">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="148">
-              <caret line="237" column="27" lean-forward="true" selection-start-line="237" selection-start-column="27" selection-end-line="237" selection-end-column="27" />
+            <state relative-caret-position="6372">
+              <caret line="236" column="33" lean-forward="true" selection-start-line="236" selection-start-column="33" selection-end-line="236" selection-end-column="33" />
             </state>
           </provider>
         </entry>
@@ -175,7 +175,7 @@
       <updated>1555430979807</updated>
       <workItem from="1555430982156" duration="28000" />
       <workItem from="1556001917298" duration="11985000" />
-      <workItem from="1556185497134" duration="863000" />
+      <workItem from="1556185497134" duration="1356000" />
     </task>
     <task id="LOCAL-00001" summary="AVL tree implemntation.&#10;Implemented ctor and insertion.&#10;Need to implement deletion and dtor.">
       <created>1556020699183</created>
@@ -188,7 +188,7 @@
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="12876000" />
+    <option name="totallyTimeSpent" value="13369000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-7" y="-7" width="1550" height="838" extended-state="6" />
@@ -245,8 +245,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/AVLtree.h">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="148">
-          <caret line="237" column="27" lean-forward="true" selection-start-line="237" selection-start-column="27" selection-end-line="237" selection-end-column="27" />
+        <state relative-caret-position="6372">
+          <caret line="236" column="33" lean-forward="true" selection-start-line="236" selection-start-column="33" selection-end-line="236" selection-end-column="33" />
         </state>
       </provider>
     </entry>

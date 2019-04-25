@@ -91,8 +91,8 @@ private:
             Node* temp= n->rightSon;
             while (temp->leftSon!=NULL)
                 temp=temp->leftSon;
-            n->key= temp->key;
-            n->data= temp->data;
+            n->key= K(temp->key);
+            n->data= T(temp->data);
             n->height= calcHeight(n);
             temp->key= key;
             recRemoval(n, key);
@@ -227,13 +227,13 @@ private:
         Node *c = b->leftSon;
         Node *moveA = new Node;
         moveA->data = T(a->data);
-        moveA->key = T(a->key);
+        moveA->key = K(a->key);
         moveA->leftSon = a->leftSon;
         moveA->rightSon = c->leftSon;
         moveA->height = calcHeight(moveA);
         a->leftSon = moveA;
         a->data = T(c->data);
-        a->key = T(c->key);
+        a->key = K(c->key);
         b->leftSon = c->rightSon;
         b->height = calcHeight(b);
         a->height = calcHeight(a);
