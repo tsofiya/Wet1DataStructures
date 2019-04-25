@@ -26,7 +26,7 @@ public:
     }
 
 
-    ~AVLtree(){
+    ~AVLtree() {
         deleteTree(root);
     }
 
@@ -41,13 +41,13 @@ public:
 
     }
 
-    void remove(const K& key){
-        recRemoval(root, key);
+    void remove(const K &key) {
+        recRemoval(root, NULL, key);
     }
 
     void preOrder() {
         preOrder(root);
-        std::cout <<std::endl;
+        std::cout << std::endl;
     }
 
 private:
@@ -60,54 +60,69 @@ private:
 
     }
 
-    void recRemoval(Node*n, const K& key){
-        if (n==NULL)
+    void recRemoval(Node *n, Node *f, const K &key) {
+        if (n == NULL)
             return;
-        if (n->key<key)
-            recRemoval(n->rightSon, key);
-        else if (n->key>key)
-            recRemoval(n->leftSon, key);
-        else if (n->leftSon==NULL && n->rightSon==NULL){
-            delete(n);
-            return;
+        if (n->key < key)
+            recRemoval(n->rightSon, n, key);
+        else if (n->key > key)
+            recRemoval(n->leftSon, n, key);
+        else if (n->leftSon == NULL && n->rightSon == NULL) {
+            if (f != NULL) {
+                if (f->leftSon == n) {
+                    f->leftSon = NULL;
+                }
+
+                else if (f->rightSon == n) {
+                    f->rightSon = NULL;
+                }
+                delete (n);
+                return;
+            }
+            else
+            {
+
+                delete (n);
+                root = NULL;
+                return;
+            }
         }
-        else if (n->leftSon==NULL){
-            Node* temp= n->rightSon;
-            n->rightSon=temp->rightSon;
-            n->leftSon= temp->leftSon;
-            n->key= K(temp->key);
-            n->data= T(temp->data);
-            delete(temp);
-        }
-        else if (n->rightSon==NULL){
-            Node* temp= n->leftSon;
-            n->rightSon=temp->rightSon;
-            n->leftSon= temp->leftSon;
-            n->key= temp->key;
-            n->data= temp->data;
-            delete(temp);
-        }
-        else{
-            Node* temp= n->rightSon;
-            while (temp->leftSon!=NULL)
-                temp=temp->leftSon;
-            n->key= K(temp->key);
-            n->data= T(temp->data);
-            n->height= calcHeight(n);
-            temp->key= key;
-            recRemoval(n, key);
+        else if (n->leftSon == NULL)
+        {
+            Node *temp = n->rightSon;
+            n->rightSon = temp->rightSon;
+            n->leftSon = temp->leftSon;
+            n->key = K(temp->key);
+            n->data = T(temp->data);
+            delete (temp);
+        } else if (n->rightSon == NULL) {
+            Node *temp = n->leftSon;
+            n->rightSon = temp->rightSon;
+            n->leftSon = temp->leftSon;
+            n->key = temp->key;
+            n->data = temp->data;
+            delete (temp);
+        } else {
+            Node *temp = n->rightSon;
+            while (temp->leftSon != NULL)
+                temp = temp->leftSon;
+            n->key = temp->key;
+            n->data = temp->data;
+            n->height = calcHeight(n);
+            temp->key = key;
+            recRemoval(n, f, key);
         }
 
-        n->height= calcHeight(n);
+        n->height = calcHeight(n);
         preformRotation(n);
     }
 
-    void deleteTree(Node* n){
-        if (n==NULL)
+    void deleteTree(Node *n) {
+        if (n == NULL)
             return;
         deleteTree(n->leftSon);
         deleteTree(n->rightSon);
-        delete(n);
+        delete (n);
     }
 
     void recInsert(Node *in, Node *curr) {
@@ -152,9 +167,9 @@ private:
         if (N->rightSon == NULL && N->leftSon == NULL)
             return 0;
         if (N->rightSon == NULL)
-            return N->leftSon->height+1;
+            return N->leftSon->height + 1;
         if (N->leftSon == NULL)
-            return -1-N->rightSon->height;
+            return -1 - N->rightSon->height;
         return (N->leftSon->height) - (N->rightSon->height);
     }
 
@@ -170,18 +185,18 @@ private:
 
     //preform LL rotation
     void llRotation(Node *a) {
-        Node * b= a->leftSon;
-        Node* moveA= new Node;
+        Node *b = a->leftSon;
+        Node *moveA = new Node;
         moveA->data = T(a->data);
         moveA->key = K(a->key);
         moveA->rightSon = a->rightSon;
         moveA->leftSon = b->rightSon;
         moveA->height = calcHeight(moveA);
-        a->data= T(b->data);
-        a->key= K(b->key);
-        a->leftSon= b->leftSon;
-        a->rightSon= moveA;
-        delete(b);
+        a->data = T(b->data);
+        a->key = K(b->key);
+        a->leftSon = b->leftSon;
+        a->rightSon = moveA;
+        delete (b);
     }
 
     //preform LR rotation
@@ -227,13 +242,13 @@ private:
         Node *c = b->leftSon;
         Node *moveA = new Node;
         moveA->data = T(a->data);
-        moveA->key = K(a->key);
+        moveA->key = T(a->key);
         moveA->leftSon = a->leftSon;
         moveA->rightSon = c->leftSon;
         moveA->height = calcHeight(moveA);
         a->leftSon = moveA;
         a->data = T(c->data);
-        a->key = K(c->key);
+        a->key = T(c->key);
         b->leftSon = c->rightSon;
         b->height = calcHeight(b);
         a->height = calcHeight(a);
