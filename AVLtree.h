@@ -47,6 +47,7 @@ public:
 
     void preOrder() {
         preOrder(root);
+        std::cout <<std::endl;
     }
 
 private:
@@ -56,15 +57,16 @@ private:
             preOrder(root->leftSon);
             preOrder(root->rightSon);
         }
+
     }
 
     void recRemoval(Node*n, const K& key){
         if (n==NULL)
             return;
         if (n->key<key)
-            recRemoval(n->leftSon, key);
-        else if (n->key>key)
             recRemoval(n->rightSon, key);
+        else if (n->key>key)
+            recRemoval(n->leftSon, key);
         else if (n->leftSon==NULL && n->rightSon==NULL){
             delete(n);
             return;
@@ -73,8 +75,8 @@ private:
             Node* temp= n->rightSon;
             n->rightSon=temp->rightSon;
             n->leftSon= temp->leftSon;
-            n->key= temp->key;
-            n->data= temp->data;
+            n->key= K(temp->key);
+            n->data= T(temp->data);
             delete(temp);
         }
         else if (n->rightSon==NULL){
@@ -167,23 +169,19 @@ private:
     }
 
     //preform LL rotation
-    void llRotation(Node *n) {
-        Node *a = new Node;
-        a->data = T(n->data);
-        a->key = K(n->key);
-        a->leftSon = n->leftSon;
-        a->rightSon = n->rightSon->leftSon;
-        a->height = calcHeight(a);
-        n->data = T(n->rightSon->data);
-        n->key = K(n->rightSon->key);
-        Node *b = n->leftSon;
-        if (b == NULL)
-            n->leftSon = NULL;
-        else
-            n->leftSon = b->leftSon;
-        n->rightSon = a;
-        n->height = calcHeight(n);
-        delete (b);
+    void llRotation(Node *a) {
+        Node * b= a->leftSon;
+        Node* moveA= new Node;
+        moveA->data = T(a->data);
+        moveA->key = K(a->key);
+        moveA->rightSon = a->rightSon;
+        moveA->leftSon = b->rightSon;
+        moveA->height = calcHeight(moveA);
+        a->data= T(b->data);
+        a->key= K(b->key);
+        a->leftSon= b->leftSon;
+        a->rightSon= moveA;
+        delete(b);
     }
 
     //preform LR rotation
