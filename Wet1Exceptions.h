@@ -18,6 +18,18 @@ namespace Wet1Utils {
             return "Wet1Exception: Cannot find key in tree.";
         }
     };
+
+    class IllegalValue:public Wet1Exceptions{
+        virtual const char* what() const throw(){
+            return "Wet1Exception: Illegal value.";
+        }
+    };
+
+    class OutOfBounds:public Wet1Exceptions{
+        virtual const char* what() const throw(){
+            return "Wet1Exception: Out of bounds.";
+        }
+    };
 }
 
 
