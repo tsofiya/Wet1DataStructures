@@ -5,6 +5,9 @@
 #ifndef WET1DATASTRUCTURES_AVLTREE_H
 #define WET1DATASTRUCTURES_AVLTREE_H
 
+#include "Wet1Exceptions.h"
+
+using namespace Wet1Utils;
 #include <iostream>
 
 
@@ -45,6 +48,11 @@ public:
         recRemoval(root, NULL, key);
     }
 
+    //Return the data for a certain key. If the key does not exist, throws KeyNotExist();
+    T& getByKey(const K& key){
+        return recGetByKey(root, key);
+    }
+
     void preOrder() {
         preOrder(root);
         std::cout << std::endl;
@@ -60,6 +68,15 @@ private:
 
     }
 
+    T& recGetByKey(Node*n, const K& key){
+        if (n==NULL)
+            throw KeyNotExist();
+        if (n->key==key)
+            return n->data;
+        if (key< n->key)
+            recGetByKey(n->leftSon, key);
+        recGetByKey(n->rightSon, key);
+    }
     void recRemoval(Node *n, Node *f, const K &key) {
         if (n == NULL)
             return;
