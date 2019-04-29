@@ -85,6 +85,9 @@
 		<Unit filename="D:/repositories/Wet1DataStructures/AVLtree.h">
 			<Option target="Wet1DataStructures"/>
 		</Unit>
+		<Unit filename="D:/repositories/Wet1DataStructures/Schedule.h">
+			<Option target="Wet1DataStructures"/>
+		</Unit>
 		<Unit filename="D:/repositories/Wet1DataStructures/main.cpp">
 			<Option target="Wet1DataStructures"/>
 		</Unit>
