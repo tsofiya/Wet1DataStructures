@@ -72,10 +72,18 @@ public:
         if (hours<=0&& hour<hours)
             throw IllegalValue();
         int size= emptyRoomsList[hour-1].size();
-        int** empty=malloc(sizeof(int*)*hour);
+        int** empty=(int**)malloc(sizeof(int*)*hour);
+        if (!empty)
+            throw std::bad_alloc();
         auto it= emptyRoomsList[hour-1].beginForward();
         for (int i = 0; i < size; ++i) {
-            empty[i]=malloc(sizeof(int));
+            empty[i]=(int*)malloc(sizeof(int));
+            if (!empty[i]) {
+                for (int j = 0; j < i; ++j) {
+                    free(empty[i]);
+                }
+                throw std::bad_alloc();
+            }
             *empty[i]=*it;
         }
         return empty;
