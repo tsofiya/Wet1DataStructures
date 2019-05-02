@@ -9,7 +9,6 @@
 #include "BiDirectionalList.h"
 
 
-
 class Schedule{
     typedef struct{
         int room;
@@ -66,6 +65,21 @@ public:
 
     float CalculateScheduleEfficiency(){
         return (float)lecturesNum/(rooms*atListOne);
+    }
+
+
+    int** GetAllFreeRoomsByHour(int hour, int *roomNum){
+        if (hours<=0&& hour<hours)
+            throw IllegalValue();
+        int size= emptyRoomsList[hour-1].size();
+        int** empty=malloc(sizeof(int*)*hour);
+        auto it= emptyRoomsList[hour-1].beginForward();
+        for (int i = 0; i < size; ++i) {
+            empty[i]=malloc(sizeof(int));
+            *empty[i]=*it;
+        }
+        return empty;
+
     }
 
 

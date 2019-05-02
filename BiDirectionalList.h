@@ -21,10 +21,49 @@ class BiDirectionalList {
 private:
     Node<T> *head;
     Node<T> *tail;
+    friend ListIterator;
 
 public:
 
+    class ListIterator{
+    private:
+        BiDirectionalList *list;
+        Node* current;
+    public:
+        ListIterator(BiDirectionalList *lst, bool hOrT):list(lst) {
+            if (lst==NULL)
+                throw NullArgument();
+            if (lst->head==NULL)
+                current==NULL;
+            else if (hOrT){
+                current==head;
+            } else {
+                current == tail;
+            }
+        }
+
+        ListIterator&operator++(){
+            if (current==NULL)
+                return *this;
+            current=current->next;
+            return *this;
+        }
+
+        ListIterator&operator--(){
+            if (current==NULL)
+                return *this;
+            current=current->previous;
+            return *this;
+        }
+
+        T&operator*(){
+            return current->data;
+        }
+
+    };
+
     BiDirectionalList(Node<T> *h = NULL, Node<T> *t = NULL) : head(h), tail(t) {}
+
     Node<T>* push(const T& data){
         Node<T> *n= new Node<T>;
         n->data= data;
@@ -67,6 +106,23 @@ public:
             }
     }
 
+    ListIterator& beginForward(){
+        return ListIterator(this, true);
+    }
+
+    ListIterator& beginBackward(){
+        return ListIterator(this, false);
+    }
+
+    int size(){
+        int s= 0;
+        Node* ptr=head;
+        while (ptr!=NULL) {
+            s++;
+            ptr=ptr->next;
+        }
+        return s;
+    }
 
 };
 

@@ -30,6 +30,12 @@ namespace Wet1Utils {
             return "Wet1Exception: Out of bounds.";
         }
     };
+
+    class NullArgument:public Wet1Exceptions{
+        virtual const char* what() const throw(){
+            return "Wet1Exception: Null Argument.";
+        }
+    };
 }
 
 
