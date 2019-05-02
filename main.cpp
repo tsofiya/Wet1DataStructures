@@ -266,7 +266,9 @@ static errorType OnChangeCourseID(void* DS, const char* const command) {
 
 static errorType OnCalculateScheduleEfficiency(void* DS, const char* const command) {
     float efficiency;
+#pragma GCC diagnostic ignored "-Wformat-zero-length"
     ValidateRead(sscanf(command, ""), 0, "%s failed.\n", commandStr[CALCULATESCHEDULEEFFICIENCY_CMD]);
+#pragma GCC diagnostic ignored "-Wformat-zero-length"
     StatusType res = CalculateScheduleEfficiency(DS, &efficiency);
 
     if (res != SUCCESS) {

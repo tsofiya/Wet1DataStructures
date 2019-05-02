@@ -28,10 +28,9 @@ class Schedule{
     int rooms;
     int lecturesNum;
     int atListOne;
-    AVLtree<int, AVLtree<int, RoomAndHour>> courses;
+    AVLtree<int, AVLtree<int, RoomAndHour>*> courses;
 
 public:
-
     Schedule(int h, int r):hours(h), rooms(r), courses(){
         idPointerArray= new idAndPointer [rooms*hours];
         emptyRoomsList= new BiDirectionalList<int>[h];
@@ -51,7 +50,22 @@ public:
 
         lecturesNum=0;
         atListOne= 0;
+    }
 
+    //Throws key not exist exception.
+    void ChangeCourseID(int oldCourseID, int newCourseID){
+        AVLtree<int, RoomAndHour>* old= courses.getByKey(oldCourseID);
+        RoomAndHour* rnhArray= old->getAllData();
+        int size= old->getTreeSize();
+        for (int i = 0; i < size; ++i) {
+            idPointerArray[rnhArray[i]].courseId= newCourseID;
+        }
+
+        delete(rnhArray);
+    }
+
+    float CalculateScheduleEfficiency(){
+        return (float)lecturesNum/(rooms*atListOne);
     }
 
 
