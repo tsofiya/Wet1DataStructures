@@ -25,6 +25,7 @@ private:
 public:
 
     BiDirectionalList(Node<T> *h = NULL, Node<T> *t = NULL) : head(h), tail(t) {}
+
     Node<T>* push(const T& data){
         Node<T> *n= new Node<T>;
         n->data= data;
@@ -44,6 +45,44 @@ public:
         return n;
 
     }
+
+    Node<T>* removeNode(const Node<T>* toRemove){
+
+        if (toRemove==NULL){
+            return NULL; //or throw exception?
+        }
+        if (toRemove->next){
+            if(toRemove->previous) {
+            (toRemove->next)->previous = toRemove->previous;
+            (toRemove->previous)->next = toRemove->next;
+            delete (toRemove);
+            return head;
+        }
+            else{
+                head=toRemove->next;
+                head->previous=NULL;
+                delete (toRemove);
+                return head;
+        }
+        }
+        if (!toRemove->next){
+            if(toRemove->previous){
+                tail=(toRemove->previous);
+                tail->next=NULL;
+                delete (toRemove);
+                return head;
+            }
+
+            else{ //if (!toRemove->previous)
+                delete(toRemove);
+                head=NULL;
+                tail=NULL;
+                return NULL;
+            }
+        }
+    }
+
+
 
     friend ostream &operator<<(ostream &os, BiDirectionalList<T> &list) {
         os << "direction 1: "<<std::endl;

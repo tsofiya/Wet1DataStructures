@@ -8,26 +8,39 @@
 #include <exception>
 
 namespace Wet1Utils {
-    class Wet1Exceptions : public std::exception{
+    class Wet1Exceptions : public std::exception {
     public:
-        virtual ~Wet1Exceptions() throw(){}
+        virtual ~Wet1Exceptions() throw() {}
     };
 
-    class KeyNotExist:public Wet1Exceptions{
-        virtual const char* what() const throw(){
+    class KeyNotExist : public Wet1Exceptions {
+        virtual const char *what() const throw() {
             return "Wet1Exception: Cannot find key in tree.";
         }
     };
 
-    class IllegalValue:public Wet1Exceptions{
-        virtual const char* what() const throw(){
+    class IllegalValue : public Wet1Exceptions {
+        virtual const char *what() const throw() {
             return "Wet1Exception: Illegal value.";
         }
     };
 
-    class OutOfBounds:public Wet1Exceptions{
-        virtual const char* what() const throw(){
+    class OutOfBounds : public Wet1Exceptions {
+        virtual const char *what() const throw() {
             return "Wet1Exception: Out of bounds.";
+        }
+
+    };
+
+    class Failure : public Wet1Exceptions {
+        virtual const char *what() const throw() {
+            return "Wet1Exception: Failure.";
+        }
+    };
+
+    class NullArgument : public Wet1Exceptions {
+        virtual const char *what() const throw() {
+            return "Wet1Exception: Null Argument.";
         }
     };
 }

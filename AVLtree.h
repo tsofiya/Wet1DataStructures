@@ -11,7 +11,7 @@ using namespace Wet1Utils;
 #include <iostream>
 
 
-template<class T, class K>
+template<class K, class T>
 class AVLtree {
 private:
     typedef struct Node_t {
@@ -22,9 +22,10 @@ private:
         T data;
     } Node;
     Node *root;
+    int size;
 
 public:
-    AVLtree() {
+    AVLtree() : size(0) {
         root = NULL;
     }
 
@@ -36,16 +37,18 @@ public:
     void insert(const K &key, const T &data) {
         if (!root) {
             root = new Node{NULL, NULL, 0, K(key), T(data)};
+            size++;
             return;
         }
 
         Node *n = new Node{NULL, NULL, 0, K(key), T(data)};
         recInsert(n, root);
-
+        size++;
     }
 
     void remove(const K &key) {
         recRemoval(root, NULL, key);
+        size--;
     }
 
     //Return the data for a certain key. If the key does not exist, throws KeyNotExist();
@@ -53,10 +56,30 @@ public:
         return recGetByKey(root, key);
     }
 
-    void preOrder() {
+    void preOrderPrint() {
         preOrder(root);
         std::cout << std::endl;
     }
+
+    T *getAllData(){
+        if (size==0)
+            return NULL;
+        T *dataArray = new T[size];
+        int *pos = new int;
+        *pos = -1;
+        recGetAllData(root, dataArray, pos);
+        delete (pos);
+        return dataArray;
+    }
+
+    int getTreeSize(){
+        return size;
+    }
+
+    bool elementExistsByKey(const K& key){
+        return recElementExistsByKey(root, key);
+    }
+
 
 private:
     void preOrder(Node *root) {
@@ -68,15 +91,37 @@ private:
 
     }
 
-    T& recGetByKey(Node*n, const K& key){
+    bool recElementExistsByKey(Node*n, const K& key){
+        if (n==NULL) {
+            return false;
+        }
+        if (n->key==key)
+            return true;
+        if (key< n->key)
+            recGetByKey(n->leftSon, key);
+        return recGetByKey(n->rightSon, key);
+    }
+
+    void recGetAllData(Node *curr, T *dataArray, int *pos){
+        if (curr == NULL)
+            return;
+        (*pos)++;
+        dataArray[*pos] = T(curr->data);
+        recGetAllData(curr->leftSon, dataArray, pos);
+        recGetAllData(curr->rightSon, dataArray, pos);
+    }
+
+    T& recGetByKey(Node *n, const K& key){
         if (n==NULL)
             throw KeyNotExist();
         if (n->key==key)
             return n->data;
-        if (key< n->key)
+        if (key< n->key) {
             recGetByKey(n->leftSon, key);
-        recGetByKey(n->rightSon, key);
+        }
+        return recGetByKey(n->rightSon, key);
     }
+    
     void recRemoval(Node *n, Node *f, const K &key) {
         if (n == NULL)
             return;
