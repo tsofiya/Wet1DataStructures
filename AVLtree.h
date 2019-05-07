@@ -8,6 +8,7 @@
 #include "Wet1Exceptions.h"
 
 using namespace Wet1Utils;
+
 #include <iostream>
 
 
@@ -44,6 +45,7 @@ public:
         Node *n = new Node{NULL, NULL, 0, K(key), T(data)};
         recInsert(n, root);
         size++;
+
     }
 
     void remove(const K &key) {
@@ -52,7 +54,7 @@ public:
     }
 
     //Return the data for a certain key. If the key does not exist, throws KeyNotExist();
-    T& getByKey(const K& key){
+    T &getByKey(const K &key) {
         return recGetByKey(root, key);
     }
 
@@ -61,10 +63,12 @@ public:
         std::cout << std::endl;
     }
 
-    T *getAllData(){
-        if (size==0)
+
+    T* getAllData() {
+        if (size == 0) {
             return NULL;
-        T *dataArray = new T[size];
+        }
+        T* dataArray = new T[size];
         int *pos = new int;
         *pos = -1;
         recGetAllData(root, dataArray, pos);
@@ -81,25 +85,32 @@ public:
     }
 
 
+
 private:
     void preOrder(Node *root) {
         if (root != NULL) {
-            std::cout << root->key << " ";
+            std::cout << "("<<root->key << ", "<<root->data<<") ";
             preOrder(root->leftSon);
             preOrder(root->rightSon);
         }
 
     }
-
+//this can throw an exception, but it shouldnt...
     bool recElementExistsByKey(Node*n, const K& key){
         if (n==NULL) {
             return false;
         }
-        if (n->key==key)
+        if (n->key==key) {
             return true;
-        if (key< n->key)
-            recGetByKey(n->leftSon, key);
-        return recGetByKey(n->rightSon, key);
+        }
+        else {
+            if (key < n->key) {
+                return recElementExistsByKey(n->leftSon, key);
+            }
+            else {
+                return recElementExistsByKey(n->rightSon, key);
+            }
+        }
     }
 
     void recGetAllData(Node *curr, T *dataArray, int *pos){
@@ -111,17 +122,21 @@ private:
         recGetAllData(curr->rightSon, dataArray, pos);
     }
 
-    T& recGetByKey(Node *n, const K& key){
-        if (n==NULL)
+
+    T &recGetByKey(Node *n, const K &key) {
+        if (n == NULL)
             throw KeyNotExist();
-        if (n->key==key)
+        if (n->key == key) {
             return n->data;
-        if (key< n->key) {
-            recGetByKey(n->leftSon, key);
+        } else {
+            if (key < n->key) {
+                return recGetByKey(n->leftSon, key);
+            } else {
+                return recGetByKey(n->rightSon, key);
+            }
         }
-        return recGetByKey(n->rightSon, key);
     }
-    
+
     void recRemoval(Node *n, Node *f, const K &key) {
         if (n == NULL)
             return;
@@ -133,24 +148,18 @@ private:
             if (f != NULL) {
                 if (f->leftSon == n) {
                     f->leftSon = NULL;
-                }
-
-                else if (f->rightSon == n) {
+                } else if (f->rightSon == n) {
                     f->rightSon = NULL;
                 }
                 delete (n);
                 return;
-            }
-            else
-            {
+            } else {
 
                 delete (n);
                 root = NULL;
                 return;
             }
-        }
-        else if (n->leftSon == NULL)
-        {
+        } else if (n->leftSon == NULL) {
             Node *temp = n->rightSon;
             n->rightSon = temp->rightSon;
             n->leftSon = temp->leftSon;
@@ -187,6 +196,7 @@ private:
         delete (n);
     }
 
+    //Todo: this is the problematic function causing a segmentation fault
     void recInsert(Node *in, Node *curr) {
         if (in->key < curr->key) {
             if (curr->leftSon == NULL) {
@@ -304,13 +314,13 @@ private:
         Node *c = b->leftSon;
         Node *moveA = new Node;
         moveA->data = T(a->data);
-        moveA->key = T(a->key);
+        moveA->key = K(a->key);
         moveA->leftSon = a->leftSon;
         moveA->rightSon = c->leftSon;
         moveA->height = calcHeight(moveA);
         a->leftSon = moveA;
         a->data = T(c->data);
-        a->key = T(c->key);
+        a->key = K(c->key);
         b->leftSon = c->rightSon;
         b->height = calcHeight(b);
         a->height = calcHeight(a);

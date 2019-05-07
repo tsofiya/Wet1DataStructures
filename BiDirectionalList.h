@@ -21,8 +21,46 @@ class BiDirectionalList {
 private:
     Node<T> *head;
     Node<T> *tail;
+    //friend ListIterator;
 
 public:
+
+    class ListIterator{
+    private:
+        BiDirectionalList *list;
+        Node<T>* current;
+    public:
+        ListIterator(BiDirectionalList *lst, bool hOrT):list(lst) {
+            if (lst==NULL)
+                throw NullArgument();
+            if (lst->head==NULL)
+                current=NULL;
+            else if (hOrT){
+                current = (lst)->head;
+            } else {
+                current = (lst)->tail;
+            }
+        }
+
+        ListIterator&operator++(){
+            if (current==NULL)
+                return *this;
+            current=current->next;
+            return *this;
+        }
+
+        ListIterator&operator--(){
+            if (current==NULL)
+                return *this;
+            current=current->previous;
+            return *this;
+        }
+
+        T&operator*(){
+            return current->data;
+        }
+
+    };
 
     BiDirectionalList(Node<T> *h = NULL, Node<T> *t = NULL) : head(h), tail(t) {}
 
@@ -80,6 +118,7 @@ public:
                 return NULL;
             }
         }
+        return head;
     }
 
 
@@ -106,6 +145,24 @@ public:
             }
     }
 
+    //I made the two following function return ListIterators, not referenecs... hope it'll do, if not- flip back to &s
+    ListIterator beginForward(){
+        return ListIterator(this, true);
+    }
+
+    ListIterator beginBackward(){
+        return ListIterator(this, false);
+    }
+
+    int size(){
+        int s= 0;
+        Node<T>* ptr=head;
+        while (ptr!=NULL) {
+            s++;
+            ptr=ptr->next;
+        }
+        return s;
+    }
 
 };
 

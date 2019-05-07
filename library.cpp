@@ -8,6 +8,8 @@
 void *Init(int hours, int rooms) {
     try {
         Schedule *DS = new Schedule(hours, rooms);
+        return (void*)DS;
+
     }
     catch (const Wet1Exceptions& e){
         return NULL;
@@ -15,7 +17,6 @@ void *Init(int hours, int rooms) {
     catch (std::bad_alloc& ba){
         return NULL;
     }
-    return (void*)DS;
 }
 
 StatusType AddLecture(void *DS, int hour, int roomID, int courseID) {
@@ -29,7 +30,7 @@ StatusType AddLecture(void *DS, int hour, int roomID, int courseID) {
     catch (const IllegalValue& e){
         return INVALID_INPUT;
     }
-    catch (const FailureToAddLecture& e){
+    catch (const Failure& e){
         return FAILURE;
     }
     catch (const std::bad_alloc& ba){
@@ -124,7 +125,7 @@ StatusType GetAllFreeRoomsByHour(void *DS, int hour, int **rooms, int* numOfRoom
     }
 
     try {
-        ((Schedule *)DS)-> GetAllFreeRoomsByHour(hour, rooms, numOfRooms);
+        rooms=((Schedule *)DS)-> GetAllFreeRoomsByHour(hour, numOfRooms);
     }
     catch (const IllegalValue& e){
         return INVALID_INPUT;

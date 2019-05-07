@@ -11,7 +11,6 @@
 #include <iostream>
 
 
-
 class Schedule{
   /*  typedef struct{
         int room;
@@ -23,7 +22,7 @@ class Schedule{
       int room;
       int hour;
     public:
-      RoomAndHour(int r, int h): room(r), hour(h){}
+      RoomAndHour(int r=0, int h=0): room(r), hour(h){}
       int getHour() {
           return hour;
       }
@@ -44,10 +43,10 @@ class Schedule{
     int rooms;
     int lecturesNum;
     int hoursWithLecture;
+
     AVLtree<int, AVLtree<int, RoomAndHour>*> courses;
 
 public:
-
     Schedule(int h, int r):hours(h), rooms(r), courses(){
         idPointerArray= new idAndPointer [rooms*hours];
         emptyRoomsList= new BiDirectionalList<int>[h];
@@ -72,6 +71,51 @@ public:
 
     }
 
+    //Throws key not exist exception.
+    void ChangeCourseID(int oldCourseID, int newCourseID){
+        AVLtree<int, RoomAndHour>* old= courses.getByKey(oldCourseID);
+        RoomAndHour* rnhArray;
+        rnhArray = old->getAllData();
+        int size= old->getTreeSize();
+        int index=0, h=0, r=0;
+        for (int i = 0; i < size; ++i) {
+            h=rnhArray[i].getHour();
+            r=rnhArray[i].getRoom();
+            index= dimensionsToIndex(r,h);
+          //  idPointerArray[*(rnhArray[i])].courseId= newCourseID;
+            idPointerArray[index].courseId= newCourseID;
+        }
+
+        delete(rnhArray);
+    }
+
+    float CalculateScheduleEfficiency(){
+        return (float)lecturesNum/(rooms*hoursWithLecture);
+    }
+
+
+    int** GetAllFreeRoomsByHour(int hour, int *roomNum){
+        if (hours<=0&& hour<hours)
+            throw IllegalValue();
+        int size= emptyRoomsList[hour-1].size();
+        int** empty=(int**)malloc(sizeof(int*)*hour);
+        if (!empty)
+            throw std::bad_alloc();
+        auto it= emptyRoomsList[hour-1].beginForward();
+        for (int i = 0; i < size; ++i) {
+            empty[i]=(int*)malloc(sizeof(int));
+            if (!empty[i]) {
+                for (int j = 0; j < i; ++j) {
+                    free(empty[i]);
+                }
+                throw std::bad_alloc();
+            }
+            *empty[i]=*it;
+        }
+        return empty;
+
+    }
+
     void AddLecture (int hour, int roomID, int courseID){
         if (hour<0 || roomID<0 || courseID<=0 || roomID>=rooms ||
                 hour >= hours){
@@ -81,15 +125,24 @@ public:
         if (idPointerArray[index].courseId != -1){
             throw Failure();
         }
-        //Todo: implement a node removal function in the bi-directional list class
+        //Todo: check and fix the node removal function in the bi-directional list class, there is a problem
+
         emptyRoomsList[hour].removeNode(idPointerArray[index].n);
         idPointerArray[index].courseId=courseID;
 
         if (!(courses.elementExistsByKey(courseID))){
-            courses.insert(courseID, new AVLtree<int, RoomAndHour>());
+
+            AVLtree<int,RoomAndHour> tree; // this is new
+            //courses.insert(courseID, new AVLtree<int, RoomAndHour>());
+            courses.insert(courseID, &tree);
         }
+
+        courses.preOrderPrint();
+
         RoomAndHour rah=RoomAndHour(roomID, hour);
+
         AVLtree<int, RoomAndHour>* courseTree=courses.getByKey(courseID);
+        //todo: this is the problematic function:
         courseTree->insert(index, rah);
         lecturesNum++;
         emptyRoomsAmount[hour]--;
@@ -132,7 +185,7 @@ public:
         }
 
         idPointerArray[index].n=emptyRoomsList[hour].push(roomID);
-        idPointerArray[index].courseId==-1;
+        idPointerArray[index].courseId=-1;
         emptyRoomsAmount[hour]++;
         if (emptyRoomsAmount[hour]==1){
             hoursWithLecture--;
