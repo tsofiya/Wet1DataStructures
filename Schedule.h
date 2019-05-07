@@ -70,6 +70,13 @@ public:
 
     }
 
+    ~Schedule(){
+
+        delete(emptyRoomsList);
+        delete(idPointerArray);
+
+    }
+
     //Throws key not exist exception.
     void ChangeCourseID(int oldCourseID, int newCourseID){
         if (oldCourseID<=0 || newCourseID<=0)
@@ -98,6 +105,8 @@ public:
     }
 
     float CalculateScheduleEfficiency(){
+        if (lecturesNum==0)
+            throw Failure();
         return (float)lecturesNum/(rooms*hoursWithLecture);
     }
 
@@ -108,7 +117,7 @@ public:
         int size= emptyRoomsList[hour].size();
         if (size==0)
             throw Failure();
-        int** empty=(int**)malloc(sizeof(int*)*hour);
+        int** empty=(int**)malloc(sizeof(int*)*size);
         if (!empty)
             throw std::bad_alloc();
         auto it= emptyRoomsList[hour].beginForward();
@@ -201,7 +210,7 @@ public:
         if (emptyRoomsAmount[hour]==1){
             hoursWithLecture--;
         }
-        lecturesNum++;
+        lecturesNum--;
 
         }
 //will actually return the hours array, and put the room array in "room"
@@ -230,6 +239,7 @@ public:
 
         for (int i=0; i<lecturesNum; i++) {
             hours[i]=(int*)malloc(sizeof(int));
+            rooms2[i]=(int*)malloc(sizeof(int));
             if (!hours[i]|| !rooms2[i]){
                 for (int j=0; j<=i;j++){
                     free(hours[j]);
@@ -237,6 +247,7 @@ public:
                 }
                 throw std::bad_alloc();
             }
+
             *hours[i]=lectureArray[i].getHour();
             *rooms2[i]=lectureArray[i].getRoom();
         }
