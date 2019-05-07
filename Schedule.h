@@ -51,12 +51,11 @@ public:
         idPointerArray= new idAndPointer [rooms*hours];
         emptyRoomsList= new BiDirectionalList<int>[h];
 
-        for (int i = 0; i < rooms ; ++i) {
-           // emptyRoomsList[i]= BiDirectionalList<int>(); //this isnt right
-            for (int j = 0; j < hours; ++j) {
-                int index=dimensionsToIndex(i, j);
-                emptyRoomsList[j]= BiDirectionalList<int>();
-                idPointerArray[index].n =  emptyRoomsList[i].push(index);
+        for (int i = 0; i < hours ; ++i) {
+           emptyRoomsList[i]= BiDirectionalList<int>(); //this isnt right
+            for (int j = 0; j < rooms; ++j) {
+                int index=dimensionsToIndex(j, i);
+                idPointerArray[index].n = emptyRoomsList[i].push(index);
                 idPointerArray[index].courseId = -1;
             }
         }
@@ -73,20 +72,29 @@ public:
 
     //Throws key not exist exception.
     void ChangeCourseID(int oldCourseID, int newCourseID){
+        if (oldCourseID<=0 || newCourseID<=0)
+            throw IllegalValue();
         AVLtree<int, RoomAndHour>* old= courses.getByKey(oldCourseID);
-        RoomAndHour* rnhArray;
+        RoomAndHour *rnhArray;
         rnhArray = old->getAllData();
-        int size= old->getTreeSize();
-        int index=0, h=0, r=0;
+        int size = old->getTreeSize();
+        int index = 0, h = 0, r = 0;
         for (int i = 0; i < size; ++i) {
-            h=rnhArray[i].getHour();
-            r=rnhArray[i].getRoom();
-            index= dimensionsToIndex(r,h);
-          //  idPointerArray[*(rnhArray[i])].courseId= newCourseID;
-            idPointerArray[index].courseId= newCourseID;
+            h = rnhArray[i].getHour();
+            r = rnhArray[i].getRoom();
+            index = dimensionsToIndex(r, h);
+            //  idPointerArray[*(rnhArray[i])].courseId= newCourseID;
+            idPointerArray[index].courseId = newCourseID;
         }
 
-        delete(rnhArray);
+        delete (rnhArray);
+        try {
+            AVLtree<int, RoomAndHour>* newid= courses.getByKey(newCourseID);
+            newid->addTreeToTree(*old);
+            courses.remove(oldCourseID);
+        }catch (Wet1Utils::KeyNotExist& e) {
+            courses.ChangeKey(oldCourseID, newCourseID);
+        }
     }
 
     float CalculateScheduleEfficiency(){
@@ -95,13 +103,15 @@ public:
 
 
     int** GetAllFreeRoomsByHour(int hour, int *roomNum){
-        if (hours<=0&& hour<hours)
+        if (hour<0|| hour>hours)
             throw IllegalValue();
-        int size= emptyRoomsList[hour-1].size();
+        int size= emptyRoomsList[hour].size();
+        if (size==0)
+            throw Failure();
         int** empty=(int**)malloc(sizeof(int*)*hour);
         if (!empty)
             throw std::bad_alloc();
-        auto it= emptyRoomsList[hour-1].beginForward();
+        auto it= emptyRoomsList[hour].beginForward();
         for (int i = 0; i < size; ++i) {
             empty[i]=(int*)malloc(sizeof(int));
             if (!empty[i]) {
@@ -112,6 +122,7 @@ public:
             }
             *empty[i]=*it;
         }
+        *roomNum=size;
         return empty;
 
     }
@@ -126,18 +137,18 @@ public:
             throw Failure();
         }
         //Todo: check and fix the node removal function in the bi-directional list class, there is a problem
-
+//TODO: change this.
         emptyRoomsList[hour].removeNode(idPointerArray[index].n);
         idPointerArray[index].courseId=courseID;
 
         if (!(courses.elementExistsByKey(courseID))){
 
-            AVLtree<int,RoomAndHour> tree; // this is new
+            AVLtree<int,RoomAndHour> *tree= new AVLtree<int,RoomAndHour>; // this is new
             //courses.insert(courseID, new AVLtree<int, RoomAndHour>());
-            courses.insert(courseID, &tree);
+            courses.insert(courseID, tree);
         }
 
-        courses.preOrderPrint();
+        //courses.preOrderPrint();
 
         RoomAndHour rah=RoomAndHour(roomID, hour);
 
@@ -180,7 +191,7 @@ public:
         AVLtree<int, RoomAndHour>* lectures = courses.getByKey(courseID); //may throw exception
         lectures->remove(index);
         //if this was the course's last lecture...
-        if (lectures==NULL){
+        if (lectures->getTreeSize()==0){
             courses.remove(courseID);
         }
 

@@ -58,6 +58,11 @@ public:
         return recGetByKey(root, key);
     }
 
+    void addTreeToTree(AVLtree& tree){
+        if (tree.root==NULL) return;
+        addTreeToTreeRec(tree.root);
+    }
+
     void preOrderPrint() {
         preOrder(root);
         std::cout << std::endl;
@@ -84,6 +89,11 @@ public:
         return recElementExistsByKey(root, key);
     }
 
+    void ChangeKey(K& lastK, K& newK){
+        T d= getByKey(lastK);
+        remove(lastK);
+        insert(newK, d);
+    }
 
 
 private:
@@ -95,6 +105,15 @@ private:
         }
 
     }
+
+    void addTreeToTreeRec(Node*n){
+        if (n->rightSon!=NULL)
+            addTreeToTreeRec(n->rightSon);
+        if (n->leftSon!=NULL)
+            addTreeToTreeRec(n->leftSon);
+        insert(n->key, n->data);
+    }
+
 //this can throw an exception, but it shouldnt...
     bool recElementExistsByKey(Node*n, const K& key){
         if (n==NULL) {

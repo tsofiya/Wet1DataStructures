@@ -217,11 +217,11 @@ void Test_GetAllFreeRoomsByHour(){
     assert(DS != nullptr);
 
     int num_Of_courses = 100;
-    num_Of_courses++;
-    num_Of_courses--;
-    int a=9;
+//    num_Of_courses++;
+//    num_Of_courses--;
+//    int a=9;
     int* Courses;
-    Courses=&a;
+//    Courses=&a;
     for(int i=0;i<15;i++){
         assert(AddLecture(DS,0,i,234218) == SUCCESS);
     }

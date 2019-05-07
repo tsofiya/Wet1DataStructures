@@ -94,6 +94,8 @@ StatusType ChangeCourseID (void* DS, int oldCourseID, int newCourseID){
     }
     catch (const std::bad_alloc& ba){
         return ALLOCATION_ERROR;
+    }catch (Wet1Utils::KeyNotExist& e){
+        return FAILURE;
     }
     return SUCCESS;
 }
@@ -125,7 +127,7 @@ StatusType GetAllFreeRoomsByHour(void *DS, int hour, int **rooms, int* numOfRoom
     }
 
     try {
-        rooms=((Schedule *)DS)-> GetAllFreeRoomsByHour(hour, numOfRooms);
+        rooms=(((Schedule *)DS)-> GetAllFreeRoomsByHour(hour, numOfRooms));
     }
     catch (const IllegalValue& e){
         return INVALID_INPUT;
@@ -155,6 +157,8 @@ StatusType GetAllLecturesByCourse(void *DS, int courseID, int **hours, int **roo
     }
     catch (const std::bad_alloc& ba){
         return ALLOCATION_ERROR;
+    }catch (Wet1Utils::KeyNotExist& e){
+        return FAILURE;
     }
     return SUCCESS;
 }

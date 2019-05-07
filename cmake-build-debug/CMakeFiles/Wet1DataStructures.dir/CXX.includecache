@@ -6,47 +6,35 @@
 
 #IncludeRegexTransform: 
 
-C:/Users/lucio/Documents/Wet1DataStructures/AVLtree.h
+D:/repositories/Wet1DataStructures/AVLtree.h
 Wet1Exceptions.h
-C:/Users/lucio/Documents/Wet1DataStructures/Wet1Exceptions.h
+D:/repositories/Wet1DataStructures/Wet1Exceptions.h
 iostream
 -
 
-C:/Users/lucio/Documents/Wet1DataStructures/BiDirectionalList.h
+D:/repositories/Wet1DataStructures/BiDirectionalList.h
 istream
 -
 
-C:/Users/lucio/Documents/Wet1DataStructures/Schedule.h
+D:/repositories/Wet1DataStructures/Schedule.h
 AVLtree.h
-C:/Users/lucio/Documents/Wet1DataStructures/AVLtree.h
+D:/repositories/Wet1DataStructures/AVLtree.h
 BiDirectionalList.h
-C:/Users/lucio/Documents/Wet1DataStructures/BiDirectionalList.h
+D:/repositories/Wet1DataStructures/BiDirectionalList.h
 library.h
-C:/Users/lucio/Documents/Wet1DataStructures/library.h
+D:/repositories/Wet1DataStructures/library.h
 iostream
 -
 
-C:/Users/lucio/Documents/Wet1DataStructures/Wet1Exceptions.h
+D:/repositories/Wet1DataStructures/Wet1Exceptions.h
 exception
 -
 
-C:/Users/lucio/Documents/Wet1DataStructures/library.cpp
+D:/repositories/Wet1DataStructures/library.cpp
 library.h
-C:/Users/lucio/Documents/Wet1DataStructures/library.h
+D:/repositories/Wet1DataStructures/library.h
 Schedule.h
-C:/Users/lucio/Documents/Wet1DataStructures/Schedule.h
+D:/repositories/Wet1DataStructures/Schedule.h
 
-C:/Users/lucio/Documents/Wet1DataStructures/library.h
-
-C:/Users/lucio/Documents/Wet1DataStructures/main.cpp
-assert.h
--
-stdio.h
--
-stdlib.h
--
-string.h
--
-library.h
-C:/Users/lucio/Documents/Wet1DataStructures/library.h
+D:/repositories/Wet1DataStructures/library.h
 

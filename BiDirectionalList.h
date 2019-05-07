@@ -9,7 +9,7 @@
 
 using std::ostream;
 
-template <class T>
+template<class T>
 struct Node {
     T data;
     Node *next;
@@ -25,38 +25,38 @@ private:
 
 public:
 
-    class ListIterator{
+    class ListIterator {
     private:
         BiDirectionalList *list;
-        Node<T>* current;
+        Node<T> *current;
     public:
-        ListIterator(BiDirectionalList *lst, bool hOrT):list(lst) {
-            if (lst==NULL)
+        ListIterator(BiDirectionalList *lst, bool hOrT) : list(lst) {
+            if (lst == NULL)
                 throw NullArgument();
-            if (lst->head==NULL)
-                current=NULL;
-            else if (hOrT){
+            if (lst->head == NULL)
+                current = NULL;
+            else if (hOrT) {
                 current = (lst)->head;
             } else {
                 current = (lst)->tail;
             }
         }
 
-        ListIterator&operator++(){
-            if (current==NULL)
+        ListIterator &operator++() {
+            if (current == NULL)
                 return *this;
-            current=current->next;
+            current = current->next;
             return *this;
         }
 
-        ListIterator&operator--(){
-            if (current==NULL)
+        ListIterator &operator--() {
+            if (current == NULL)
                 return *this;
-            current=current->previous;
+            current = current->previous;
             return *this;
         }
 
-        T&operator*(){
+        T &operator*() {
             return current->data;
         }
 
@@ -64,57 +64,52 @@ public:
 
     BiDirectionalList(Node<T> *h = NULL, Node<T> *t = NULL) : head(h), tail(t) {}
 
-    Node<T>* push(const T& data){
-        Node<T> *n= new Node<T>;
-        n->data= data;
-        if (head==NULL) {
+    Node<T> *push(const T &data) {
+        Node<T> *n = new Node<T>;
+        n->data = data;
+        if (head == NULL) {
             tail = n;
             head = n;
-            n->next=NULL;
-            n->previous =NULL;
-        }
-        else
-        {
+            n->next = NULL;
+            n->previous = NULL;
+        } else {
+            head->previous=n;
             n->next = head;
             n->previous = NULL;
-            head->previous =n;
             head = n;
         }
         return n;
 
     }
 
-    Node<T>* removeNode(const Node<T>* toRemove){
+    Node<T> *removeNode(const Node<T> *toRemove) {
 
-        if (toRemove==NULL){
+        if (toRemove == NULL) {
             return NULL; //or throw exception?
         }
-        if (toRemove->next){
-            if(toRemove->previous) {
-            (toRemove->next)->previous = toRemove->previous;
-            (toRemove->previous)->next = toRemove->next;
-            delete (toRemove);
-            return head;
-        }
-            else{
-                head=toRemove->next;
-                head->previous=NULL;
+        if (toRemove->next) {
+            if (toRemove->previous) {
+                (toRemove->next)->previous = toRemove->previous;
+                (toRemove->previous)->next = toRemove->next;
                 delete (toRemove);
                 return head;
-        }
-        }
-        if (!toRemove->next){
-            if(toRemove->previous){
-                tail=(toRemove->previous);
-                tail->next=NULL;
+            } else {
+                head = toRemove->next;
+                head->previous = NULL;
                 delete (toRemove);
                 return head;
             }
-
-            else{ //if (!toRemove->previous)
-                delete(toRemove);
-                head=NULL;
-                tail=NULL;
+        }
+        if (!toRemove->next) {
+            if (toRemove->previous) {
+                tail = (toRemove->previous);
+                tail->next = NULL;
+                delete (toRemove);
+                return head;
+            } else { //if (!toRemove->previous)
+                delete (toRemove);
+                head = NULL;
+                tail = NULL;
                 return NULL;
             }
         }
@@ -122,9 +117,8 @@ public:
     }
 
 
-
     friend ostream &operator<<(ostream &os, BiDirectionalList<T> &list) {
-        os << "direction 1: "<<std::endl;
+        os << "direction 1: " << std::endl;
         os << "BEGIN <-> ";
         Node<T> *ptr = list.head;
         while (ptr != NULL) {
@@ -136,30 +130,29 @@ public:
     }
 
     ~BiDirectionalList() {
-            Node<T>* currentPos = head;
-            while (currentPos!=NULL)
-            {
-                Node<T>* nextPos=currentPos->next;
-                delete(currentPos);
-                currentPos=nextPos;
-            }
+        Node<T> *currentPos = head;
+        while (currentPos != NULL) {
+            Node<T> *nextPos = currentPos->next;
+            delete (currentPos);
+            currentPos = nextPos;
+        }
     }
 
     //I made the two following function return ListIterators, not referenecs... hope it'll do, if not- flip back to &s
-    ListIterator beginForward(){
+    ListIterator beginForward() {
         return ListIterator(this, true);
     }
 
-    ListIterator beginBackward(){
+    ListIterator beginBackward() {
         return ListIterator(this, false);
     }
 
-    int size(){
-        int s= 0;
-        Node<T>* ptr=head;
-        while (ptr!=NULL) {
+    int size() {
+        int s = 0;
+        Node<T> *ptr = head;
+        while (ptr != NULL) {
             s++;
-            ptr=ptr->next;
+            ptr = ptr->next;
         }
         return s;
     }
