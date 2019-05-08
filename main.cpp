@@ -90,8 +90,8 @@ int main(int argc, const char **argv) {
     char buffer[MAX_STRING_INPUT_SIZE];
 
     // Reading commands
-    FILE *fp = fopen("../in.txt", "r");
-    while (fgets(buffer, MAX_STRING_INPUT_SIZE, fp) != NULL) {
+
+    while (fgets(buffer, MAX_STRING_INPUT_SIZE, stdin) != NULL) {
         fflush(stdout);
         if (parser(buffer) == error)
             break;

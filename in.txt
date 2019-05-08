@@ -1,0 +1,12 @@
+Init 2 2
+AddLecture 0 0 234218
+AddLecture 1 1 234218
+GetCourseID 0 0
+GetCourseID 0 1
+CalculateScheduleEfficiency
+GetAllFreeRoomsByHour 1
+ChangeCourseID 234218 234219
+GetAllLecturesByCourse 234219
+DeleteLecture 0 0
+CalculateScheduleEfficiency
+Quit
