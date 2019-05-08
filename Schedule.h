@@ -72,8 +72,8 @@ public:
 
     ~Schedule(){
 
-        delete(emptyRoomsList);
-        delete(idPointerArray);
+        delete[](emptyRoomsList);
+        delete[](idPointerArray);
 
     }
 
@@ -107,7 +107,7 @@ public:
     float CalculateScheduleEfficiency(){
         if (lecturesNum==0)
             throw Failure();
-        return (float)lecturesNum/(rooms*hoursWithLecture);
+        return ((float) lecturesNum) / (rooms * hoursWithLecture);
     }
 
 
@@ -129,7 +129,7 @@ public:
                 }
                 throw std::bad_alloc();
             }
-            *empty[i]=*it;
+            *empty[i] = getRoomByIndex(*it);
         }
         *roomNum=size;
         return empty;
@@ -207,7 +207,7 @@ public:
         idPointerArray[index].n=emptyRoomsList[hour].push(roomID);
         idPointerArray[index].courseId=-1;
         emptyRoomsAmount[hour]++;
-        if (emptyRoomsAmount[hour]==1){
+        if (emptyRoomsAmount[hour] == rooms) {
             hoursWithLecture--;
         }
         lecturesNum--;
@@ -216,7 +216,7 @@ public:
 //will actually return the hours array, and put the room array in "room"
 
     //throws exception KeyNotExist!
-    int** GetAllLecturesByCourse(int courseID, int **rooms, int *numOfLectures){
+    int *GetAllLecturesByCourse(int courseID, int **rooms, int *numOfLectures) {
 
         if (!hours || !rooms || !numOfLectures){
             throw NullArgument();
@@ -228,36 +228,36 @@ public:
         RoomAndHour* lectureArray= lectures->getAllData();
         int lecturesNum= lectures->getTreeSize();
         *numOfLectures=lecturesNum;
-        int** hours = (int**)malloc(sizeof(int*)*lecturesNum);
+
+        int *hours = (int *) malloc(sizeof(int) * lecturesNum);
         if (!hours){
             throw std::bad_alloc();
         }
-        int** rooms2 = (int**)malloc(sizeof(int*)*lecturesNum);
+        int *rooms2 = (int *) malloc(sizeof(int) * lecturesNum);
         if (!rooms2){
             throw std::bad_alloc();
         }
 
         for (int i=0; i<lecturesNum; i++) {
-            hours[i]=(int*)malloc(sizeof(int));
-            rooms2[i]=(int*)malloc(sizeof(int));
-            if (!hours[i]|| !rooms2[i]){
-                for (int j=0; j<=i;j++){
-                    free(hours[j]);
-                    free(rooms2[j]);
-                }
-                throw std::bad_alloc();
-            }
 
-            *hours[i]=lectureArray[i].getHour();
-            *rooms2[i]=lectureArray[i].getRoom();
+            hours[i] = lectureArray[i].getHour();
+            rooms2[i] = lectureArray[i].getRoom();
         }
-        rooms=rooms2;
+        *rooms = rooms2;
         return hours;
         }
 
 private:
     int dimensionsToIndex(int i, int j){
         return i*rooms+j;
+    }
+
+    int getRoomByIndex(int index) {
+        return index / rooms;
+    }
+
+    int getHourByIndex(int index) {
+        return index % rooms;
     }
 };
 

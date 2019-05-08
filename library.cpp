@@ -127,7 +127,7 @@ StatusType GetAllFreeRoomsByHour(void *DS, int hour, int **rooms, int *numOfRoom
     }
 
     try {
-        rooms = (((Schedule *) DS)->GetAllFreeRoomsByHour(hour, numOfRooms));
+        *rooms = *(((Schedule *) DS)->GetAllFreeRoomsByHour(hour, numOfRooms));
     }
     catch (const IllegalValue &e) {
         return INVALID_INPUT;
@@ -147,7 +147,7 @@ StatusType GetAllLecturesByCourse(void *DS, int courseID, int **hours, int **roo
         return INVALID_INPUT;
     }
     try {
-        *hours = *((Schedule *) DS)->GetAllLecturesByCourse(courseID, rooms, numOfLectures);
+        *hours = ((Schedule *) DS)->GetAllLecturesByCourse(courseID, rooms, numOfLectures);
     }
     catch (const IllegalValue &e) {
         return INVALID_INPUT;
@@ -165,8 +165,12 @@ StatusType GetAllLecturesByCourse(void *DS, int courseID, int **hours, int **roo
 }
 
 void Quit(void **DS) {
-    delete((Schedule*)*DS);
-    *DS = nullptr;
+    try {
+        delete((Schedule*)*DS);
+        *DS = NULL;
+    }
+    catch (std::exception &e) {}
+
 }
 
 

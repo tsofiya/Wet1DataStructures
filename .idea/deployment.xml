@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="PublishConfigData">
+    <serverData>
+      <paths name="csl3 (85915967-65b9-49c2-867c-593f2d2e5587)">
+        <serverdata>
+          <mappings>
+            <mapping deploy="/tmp/tmp.cCefUeABE5" local="$PROJECT_DIR$" />
+          </mappings>
+          <excludedPaths>
+            <excludedPath local="true" path="$PROJECT_DIR$/cmake-build-debug" />
+          </excludedPaths>
+        </serverdata>
+      </paths>
+      <paths name="tsofvm (dd8fa987-4ab2-4f6a-9796-2522c17f1d09)">
+        <serverdata>
+          <mappings>
+            <mapping deploy="/tmp/tmp.4XupcipHmF" local="$PROJECT_DIR$" />
+          </mappings>
+          <excludedPaths>
+            <excludedPath local="true" path="$PROJECT_DIR$/cmake-build-debug" />
+          </excludedPaths>
+        </serverdata>
+      </paths>
+    </serverData>
+  </component>
+</project>

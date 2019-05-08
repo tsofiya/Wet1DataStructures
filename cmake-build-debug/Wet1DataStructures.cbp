@@ -8,99 +8,101 @@
 		<Option virtualFolders="CMake Files\;"/>
 		<Build>
 			<Target title="all">
-				<Option working_dir="D:/repositories/Wet1DataStructures/cmake-build-debug"/>
+				<Option working_dir="/tmp/tmp.4XupcipHmF/cmake-build-debug"/>
 				<Option type="4"/>
 				<MakeCommands>
-					<Build command="C:/MinGW/bin/mingw32-make.exe -f &quot;D:/repositories/Wet1DataStructures/cmake-build-debug/Makefile&quot;  VERBOSE=1 all"/>
-					<CompileFile command="C:/MinGW/bin/mingw32-make.exe -f &quot;D:/repositories/Wet1DataStructures/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
-					<Clean command="C:/MinGW/bin/mingw32-make.exe -f &quot;D:/repositories/Wet1DataStructures/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
-					<DistClean command="C:/MinGW/bin/mingw32-make.exe -f &quot;D:/repositories/Wet1DataStructures/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
-				</MakeCommands>
-			</Target>
-			<Target title="edit_cache">
-				<Option working_dir="D:/repositories/Wet1DataStructures/cmake-build-debug"/>
-				<Option type="4"/>
-				<MakeCommands>
-					<Build command="C:/MinGW/bin/mingw32-make.exe -f &quot;D:/repositories/Wet1DataStructures/cmake-build-debug/Makefile&quot;  VERBOSE=1 edit_cache"/>
-					<CompileFile command="C:/MinGW/bin/mingw32-make.exe -f &quot;D:/repositories/Wet1DataStructures/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
-					<Clean command="C:/MinGW/bin/mingw32-make.exe -f &quot;D:/repositories/Wet1DataStructures/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
-					<DistClean command="C:/MinGW/bin/mingw32-make.exe -f &quot;D:/repositories/Wet1DataStructures/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
-				</MakeCommands>
-			</Target>
-			<Target title="Wet1DataStructures">
-				<Option output="D:/repositories/Wet1DataStructures/cmake-build-debug/Wet1DataStructures.exe" prefix_auto="0" extension_auto="0"/>
-				<Option working_dir="D:/repositories/Wet1DataStructures/cmake-build-debug"/>
-				<Option object_output="./"/>
-				<Option type="1"/>
-				<Option compiler="gcc"/>
-				<Compiler>
-					<Add directory="c:\mingw\bin\../lib/gcc/mingw32/6.3.0/include/c++"/>
-					<Add directory="c:\mingw\bin\../lib/gcc/mingw32/6.3.0/include/c++/mingw32"/>
-					<Add directory="c:\mingw\bin\../lib/gcc/mingw32/6.3.0/include/c++/backward"/>
-					<Add directory="c:\mingw\bin\../lib/gcc/mingw32/6.3.0/include"/>
-					<Add directory="c:\mingw\bin\../lib/gcc/mingw32/6.3.0/../../../../include"/>
-					<Add directory="c:\mingw\bin\../lib/gcc/mingw32/6.3.0/include-fixed"/>
-					<Add directory="c:\mingw\bin\../lib/gcc/mingw32/6.3.0/../../../../mingw32/include"/>
-				</Compiler>
-				<MakeCommands>
-					<Build command="C:/MinGW/bin/mingw32-make.exe -f &quot;D:/repositories/Wet1DataStructures/cmake-build-debug/Makefile&quot;  VERBOSE=1 Wet1DataStructures"/>
-					<CompileFile command="C:/MinGW/bin/mingw32-make.exe -f &quot;D:/repositories/Wet1DataStructures/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
-					<Clean command="C:/MinGW/bin/mingw32-make.exe -f &quot;D:/repositories/Wet1DataStructures/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
-					<DistClean command="C:/MinGW/bin/mingw32-make.exe -f &quot;D:/repositories/Wet1DataStructures/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
-				</MakeCommands>
-			</Target>
-			<Target title="Wet1DataStructures/fast">
-				<Option output="D:/repositories/Wet1DataStructures/cmake-build-debug/Wet1DataStructures.exe" prefix_auto="0" extension_auto="0"/>
-				<Option working_dir="D:/repositories/Wet1DataStructures/cmake-build-debug"/>
-				<Option object_output="./"/>
-				<Option type="1"/>
-				<Option compiler="gcc"/>
-				<Compiler>
-					<Add directory="c:\mingw\bin\../lib/gcc/mingw32/6.3.0/include/c++"/>
-					<Add directory="c:\mingw\bin\../lib/gcc/mingw32/6.3.0/include/c++/mingw32"/>
-					<Add directory="c:\mingw\bin\../lib/gcc/mingw32/6.3.0/include/c++/backward"/>
-					<Add directory="c:\mingw\bin\../lib/gcc/mingw32/6.3.0/include"/>
-					<Add directory="c:\mingw\bin\../lib/gcc/mingw32/6.3.0/../../../../include"/>
-					<Add directory="c:\mingw\bin\../lib/gcc/mingw32/6.3.0/include-fixed"/>
-					<Add directory="c:\mingw\bin\../lib/gcc/mingw32/6.3.0/../../../../mingw32/include"/>
-				</Compiler>
-				<MakeCommands>
-					<Build command="C:/MinGW/bin/mingw32-make.exe -f &quot;D:/repositories/Wet1DataStructures/cmake-build-debug/Makefile&quot;  VERBOSE=1 Wet1DataStructures/fast"/>
-					<CompileFile command="C:/MinGW/bin/mingw32-make.exe -f &quot;D:/repositories/Wet1DataStructures/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
-					<Clean command="C:/MinGW/bin/mingw32-make.exe -f &quot;D:/repositories/Wet1DataStructures/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
-					<DistClean command="C:/MinGW/bin/mingw32-make.exe -f &quot;D:/repositories/Wet1DataStructures/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<Build command="/usr/bin/make -j2 -f &quot;/tmp/tmp.4XupcipHmF/cmake-build-debug/Makefile&quot;  VERBOSE=1 all"/>
+					<CompileFile command="/usr/bin/make -j2 -f &quot;/tmp/tmp.4XupcipHmF/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j2 -f &quot;/tmp/tmp.4XupcipHmF/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j2 -f &quot;/tmp/tmp.4XupcipHmF/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
 				</MakeCommands>
 			</Target>
 			<Target title="rebuild_cache">
-				<Option working_dir="D:/repositories/Wet1DataStructures/cmake-build-debug"/>
+				<Option working_dir="/tmp/tmp.4XupcipHmF/cmake-build-debug"/>
 				<Option type="4"/>
 				<MakeCommands>
-					<Build command="C:/MinGW/bin/mingw32-make.exe -f &quot;D:/repositories/Wet1DataStructures/cmake-build-debug/Makefile&quot;  VERBOSE=1 rebuild_cache"/>
-					<CompileFile command="C:/MinGW/bin/mingw32-make.exe -f &quot;D:/repositories/Wet1DataStructures/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
-					<Clean command="C:/MinGW/bin/mingw32-make.exe -f &quot;D:/repositories/Wet1DataStructures/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
-					<DistClean command="C:/MinGW/bin/mingw32-make.exe -f &quot;D:/repositories/Wet1DataStructures/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<Build command="/usr/bin/make -j2 -f &quot;/tmp/tmp.4XupcipHmF/cmake-build-debug/Makefile&quot;  VERBOSE=1 rebuild_cache"/>
+					<CompileFile command="/usr/bin/make -j2 -f &quot;/tmp/tmp.4XupcipHmF/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j2 -f &quot;/tmp/tmp.4XupcipHmF/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j2 -f &quot;/tmp/tmp.4XupcipHmF/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="edit_cache">
+				<Option working_dir="/tmp/tmp.4XupcipHmF/cmake-build-debug"/>
+				<Option type="4"/>
+				<MakeCommands>
+					<Build command="/usr/bin/make -j2 -f &quot;/tmp/tmp.4XupcipHmF/cmake-build-debug/Makefile&quot;  VERBOSE=1 edit_cache"/>
+					<CompileFile command="/usr/bin/make -j2 -f &quot;/tmp/tmp.4XupcipHmF/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j2 -f &quot;/tmp/tmp.4XupcipHmF/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j2 -f &quot;/tmp/tmp.4XupcipHmF/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="Wet1DataStructures">
+				<Option output="/tmp/tmp.4XupcipHmF/cmake-build-debug/Wet1DataStructures" prefix_auto="0" extension_auto="0"/>
+				<Option working_dir="/tmp/tmp.4XupcipHmF/cmake-build-debug"/>
+				<Option object_output="./"/>
+				<Option type="1"/>
+				<Option compiler="gcc"/>
+				<Compiler>
+					<Add directory="/usr/include/c++/6"/>
+					<Add directory="/usr/include/x86_64-linux-gnu/c++/6"/>
+					<Add directory="/usr/include/c++/6/backward"/>
+					<Add directory="/usr/lib/gcc/x86_64-linux-gnu/6/include"/>
+					<Add directory="/usr/local/include"/>
+					<Add directory="/usr/lib/gcc/x86_64-linux-gnu/6/include-fixed"/>
+					<Add directory="/usr/include/x86_64-linux-gnu"/>
+					<Add directory="/usr/include"/>
+				</Compiler>
+				<MakeCommands>
+					<Build command="/usr/bin/make -j2 -f &quot;/tmp/tmp.4XupcipHmF/cmake-build-debug/Makefile&quot;  VERBOSE=1 Wet1DataStructures"/>
+					<CompileFile command="/usr/bin/make -j2 -f &quot;/tmp/tmp.4XupcipHmF/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j2 -f &quot;/tmp/tmp.4XupcipHmF/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j2 -f &quot;/tmp/tmp.4XupcipHmF/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="Wet1DataStructures/fast">
+				<Option output="/tmp/tmp.4XupcipHmF/cmake-build-debug/Wet1DataStructures" prefix_auto="0" extension_auto="0"/>
+				<Option working_dir="/tmp/tmp.4XupcipHmF/cmake-build-debug"/>
+				<Option object_output="./"/>
+				<Option type="1"/>
+				<Option compiler="gcc"/>
+				<Compiler>
+					<Add directory="/usr/include/c++/6"/>
+					<Add directory="/usr/include/x86_64-linux-gnu/c++/6"/>
+					<Add directory="/usr/include/c++/6/backward"/>
+					<Add directory="/usr/lib/gcc/x86_64-linux-gnu/6/include"/>
+					<Add directory="/usr/local/include"/>
+					<Add directory="/usr/lib/gcc/x86_64-linux-gnu/6/include-fixed"/>
+					<Add directory="/usr/include/x86_64-linux-gnu"/>
+					<Add directory="/usr/include"/>
+				</Compiler>
+				<MakeCommands>
+					<Build command="/usr/bin/make -j2 -f &quot;/tmp/tmp.4XupcipHmF/cmake-build-debug/Makefile&quot;  VERBOSE=1 Wet1DataStructures/fast"/>
+					<CompileFile command="/usr/bin/make -j2 -f &quot;/tmp/tmp.4XupcipHmF/cmake-build-debug/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j2 -f &quot;/tmp/tmp.4XupcipHmF/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j2 -f &quot;/tmp/tmp.4XupcipHmF/cmake-build-debug/Makefile&quot;  VERBOSE=1 clean"/>
 				</MakeCommands>
 			</Target>
 		</Build>
-		<Unit filename="D:/repositories/Wet1DataStructures/AVLtree.h">
+		<Unit filename="/tmp/tmp.4XupcipHmF/AVLtree.h">
 			<Option target="Wet1DataStructures"/>
 		</Unit>
-		<Unit filename="D:/repositories/Wet1DataStructures/BiDirectionalList.h">
+		<Unit filename="/tmp/tmp.4XupcipHmF/BiDirectionalList.h">
 			<Option target="Wet1DataStructures"/>
 		</Unit>
-		<Unit filename="D:/repositories/Wet1DataStructures/Schedule.h">
+		<Unit filename="/tmp/tmp.4XupcipHmF/Schedule.h">
 			<Option target="Wet1DataStructures"/>
 		</Unit>
-		<Unit filename="D:/repositories/Wet1DataStructures/library.cpp">
+		<Unit filename="/tmp/tmp.4XupcipHmF/library.cpp">
 			<Option target="Wet1DataStructures"/>
 		</Unit>
-		<Unit filename="D:/repositories/Wet1DataStructures/library.h">
+		<Unit filename="/tmp/tmp.4XupcipHmF/library.h">
 			<Option target="Wet1DataStructures"/>
 		</Unit>
-		<Unit filename="D:/repositories/Wet1DataStructures/main.cpp">
+		<Unit filename="/tmp/tmp.4XupcipHmF/main.cpp">
 			<Option target="Wet1DataStructures"/>
 		</Unit>
-		<Unit filename="D:/repositories/Wet1DataStructures/CMakeLists.txt">
+		<Unit filename="/tmp/tmp.4XupcipHmF/CMakeLists.txt">
 			<Option virtualFolder="CMake Files\"/>
 		</Unit>
 	</Project>
